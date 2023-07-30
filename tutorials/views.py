@@ -72,22 +72,20 @@ def tutorial_list_published(request):
 
 
 # EMPLOYEE API
-@api_view(['POST'])
-def add_employee(request):
-    logger.info("Going to add employee")
-    if request.method == 'POST':
+@api_view(['GET', 'POST'])
+def employee_list(request):
+    if request.method == 'GET':
+        logger.info("Going to add employee")
+        employee = Employee.objects.all()
+        title = request.GET.get('title', None)
+        if title is not None:
+            employee = employee.filter(title__icontains=title)
+        employees_serializer = EmployeeSerializer(employee, many=True)
+        return JsonResponse(employees_serializer.data, safe=False)
+    elif request.method == 'POST':
+        logger.info("Going to fetch employee")
         employee_serializer = EmployeeSerializer(data=JSONParser().parse(request))
         if employee_serializer.is_valid():
             employee_serializer.save()
             return JsonResponse(employee_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(employee_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['GET'])
-def employee_list(request):
-    employee = Employee.objects.all()
-    title = request.GET.get('title', None)
-    if title is not None:
-        employee = employee.filter(title__icontains=title)
-    employees_serializer = EmployeeSerializer(employee, many=True)
-    return JsonResponse(employees_serializer.data, safe=False)

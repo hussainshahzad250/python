@@ -24,7 +24,6 @@ urlpatterns = [
 
     re_path(r'^(?P<pk>\d+)/$', views.tutorial_detail, name='task_detail'),
     path('api/tutorials/published', views.tutorial_list_published, name='Tutorial'),
-    path('api/employees', views.add_employee, name='Employee'),
-    path('api/get-employees', views.employee_list, name='Employee'),
+    path('api/employees', views.employee_list, name='Employee'),
 
 ]
