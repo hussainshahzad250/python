@@ -55,6 +55,7 @@ def tutorial_detail(request, pk):
         return JsonResponse(tutorial_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
+        print("deleted success ")
         tutorial.delete()
         return JsonResponse({'message': 'Tutorial deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
