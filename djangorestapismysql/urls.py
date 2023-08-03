@@ -21,6 +21,7 @@ from tutorials import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/tutorials', views.tutorial_list),
+    path('api/tutorials/<int:pk>/', views.tutorial_detail, name='Tutorial'),
 
     re_path(r'^(?P<pk>\d+)/$', views.tutorial_detail, name='task_detail'),
     path('api/tutorials/published', views.tutorial_list_published, name='Tutorial'),
