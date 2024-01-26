@@ -103,6 +103,13 @@ Start the development server with the following command:
 ``` python manage.py createsuperuser ```
 
 ``` http://localhost:8080/admin```
+
+
+# Use below command to create ```requirement.txt``` from local installed plugins
+
+```
+pip freeze > requirement.txt
+```
   
 	
 
